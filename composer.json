@@ -7,9 +7,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "bezhansalleh/filament-shield": "^4.0@beta",
+        "filament/filament": "^4.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "plesk/ext-laravel-integration": "*"
+        "plesk/ext-laravel-integration": "*",
+        "webmodern/alpaca-activitylog": "^0.1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
