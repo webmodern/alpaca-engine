@@ -1,60 +1,56 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://web-modern.by" target="_blank"><img src="https://web-modern.by/wp-content/uploads/2025/07/alpaca-engine-github.png" alt="Alpaca Engine Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://packagist.org/packages/webmodern/alpaca-engine"><img src="https://img.shields.io/packagist/dt/webmodern/alpaca-engine" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/webmodern/alpaca-engine"><img src="https://img.shields.io/packagist/v/webmodern/alpaca-engine" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/webmodern/alpaca-engine"><img src="https://img.shields.io/packagist/l/webmodern/alpaca-engine" alt="License"></a>
 </p>
 
-## About Laravel
+# Alpaca Engine
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Laravel 12 Starter Kit
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A Starter Kit for rapid project development based on Laravel 12. Includes a modern admin panel powered by filamentphp, along with a set of popular libraries to speed up your workflow. Perfect for building admin panels and web applications with a flexible architecture.
+ 
+## Deployment and Environment Configuration Script
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project includes a utility script for safely switching and managing `.env` files on the server.
 
-## Learning Laravel
+### Usage
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Apply an environment profile** (e.g., `server`, `local`, `staging`):
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+./deploy/env_switch.sh [profile]
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+  Replace *[profile]* with the desired environment name (e.g., *server*, *local*).  
+  The script expects a file named *env.[profile]* in the project root (for example: *env.server*).
 
-## Laravel Sponsors
+- **Restore the last .env backup**:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+./deploy/env_switch.sh restore
+```
 
-### Premium Partners
+### What the Script Does
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- Backs up the current *.env* file to */deploy* before replacing it.
+- Switches *.env* to the specified profile (*env.[profile]*).
+- Keeps a profile-specific log file in */deploy* (e.g., *env_server.log*).
+- Cleans up old logs automatically (older than 3 months).
+- Restores the last backup if run with *restore*.
+- Clears Laravel config cache, runs migrations, and updates Composer dependencies.
 
-## Contributing
+### Additional Notes
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- The */deploy* directory is *git-ignored* except for the script itself.
+- All other files in */deploy* (backups, logs, etc.) are never committed to git.
+- Make sure the script is executable:
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+chmod +x deploy/env_switch.sh
+```
 
 ## License
 
