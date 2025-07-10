@@ -13,7 +13,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Illuminate\Support\Collection;
- use Illuminate\Support\Arr;
+use Illuminate\Support\Arr;
 
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
@@ -70,11 +70,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 //            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
             ->setDescriptionForEvent(function (string $eventName) {
                 if ($eventName === 'created') {
-                    return 'User created by user ' . auth()->user()->name . ' [' . auth()->user()->id . '].';
+                    return 'User created.';
                 } elseif ($eventName === 'updated') {
-                    return 'User updated ' . collect(Activity::all()->last()->properties->first())->keys()->implode(', ') . ' by user ' . auth()->user()->name . '.';
+                    if ( Activity::all()->last() ) {
+                        return 'User updated ' . collect(Activity::all()->last()->properties->first())->keys()->implode(', ') . '.';
+                    } else {
+                        return 'User updated.';
+                    }
                 } elseif ($eventName === 'deleted') {
-                    return 'User deleted by user ' . auth()->user()->name . ' [' . auth()->user()->id . '].';
+                    return 'User deleted.';
                 }
 
                 return 'User ' . $eventName . '.';

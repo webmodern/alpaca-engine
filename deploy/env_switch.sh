@@ -86,16 +86,6 @@ fi
 cp "$ENV_FILE" "$PROJECT_ROOT/.env"
 echo "$(date '+%F %T'): .env replaced by $ENV_FILE" >> "$LOG_FILE"
 
-# Laravel config cache clear
-cd "$PROJECT_ROOT"
-php artisan config:clear
-
-# Laravel migrate
-php artisan migrate --force
-
-# Composer update
-composer update --no-interaction --prefer-dist --optimize-autoloader
-
 echo "Operation completed. See log: $LOG_FILE"
 
 # Cleanup old logs (older than 90 days)
