@@ -174,10 +174,16 @@ class AlpacaInstallCommand extends Command
                     'email' => $email,
                     'password' => Hash::make($password),
                 ]);
-                $this->info('Admin user created.');
+                $this->info('User created.');
+
+                if (confirm('Mark this user as email confirmed?', default: true)) {
+                    $user->email_verified_at = now();
+                    $user->save();
+                    $this->info('User email marked as confirmed.');
+                }
 
                 if (confirm('Grant this user Super Admin role?', default: true)) {
-                    $this->callSilent('shield:super-admin', ['--user' => $user->id]);
+                    $this->callSilent('shield:super-admin', ['--user' => $user->id, '--panel' => 'admin']);
                     $this->info('Super Admin role assigned.');
                 }
             } else {
