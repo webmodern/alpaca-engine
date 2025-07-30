@@ -196,13 +196,13 @@ class AlpacaInstallCommand extends Command
         // 6. Mail (обновленная логика)
         if (in_array('mail', $steps)) {
             $this->info('Starting STEP: mail configuration');
-            $mailMailer = select('MAIL_MAILER', ['smtp', 'mailgun', 'sendmail', 'ses', 'log'], default: Env::get('MAIL_MAILER', 'smtp'));
-            $mailScheme = text('MAIL_SCHEME', default: Env::get('MAIL_SCHEME', 'smtps'));
-            $mailHost   = text('MAIL_HOST', default: Env::get('MAIL_HOST', 'localhost'));
-            $mailPort   = text('MAIL_PORT', default: Env::get('MAIL_PORT', 465));
-            $mailUser   = text('MAIL_USERNAME', default: Env::get('MAIL_USERNAME', ''));
-            $mailPass   = text('MAIL_PASSWORD', default: Env::get('MAIL_PASSWORD', ''));
-            $mailFrom   = text('MAIL_FROM_ADDRESS', default: Env::get('MAIL_FROM_ADDRESS', 'admin@example.com'));
+            $mailMailer = select('MAIL_MAILER', ['smtp', 'mailgun', 'sendmail', 'ses', 'log'], default: Env::get('MAIL_MAILER', ) ?? 'smtp' );
+            $mailScheme = text('MAIL_SCHEME', default: Env::get('MAIL_SCHEME', ) ?? 'smtps');
+            $mailHost   = text('MAIL_HOST', default: Env::get('MAIL_HOST', ) ?? 'localhost');
+            $mailPort   = text('MAIL_PORT', default: Env::get('MAIL_PORT', ) ?? 465);
+            $mailUser   = text('MAIL_USERNAME', default: Env::get('MAIL_USERNAME', ) ?? '');
+            $mailPass   = text('MAIL_PASSWORD', default: Env::get('MAIL_PASSWORD', ) ?? '');
+            $mailFrom   = text('MAIL_FROM_ADDRESS', default: Env::get('MAIL_FROM_ADDRESS', ) ?? 'admin@example.com');
 
             Env::writeVariables([
                 'MAIL_MAILER'       => $mailMailer,
